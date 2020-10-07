@@ -38,7 +38,7 @@ class UI:
         """ Creates the box or frame where the result
             will be displayed """
         self.Fdisplay = tk.Frame(master=self.window,
-                                 relief='groove',bg='red')
+                                 relief='groove')
         
         self.Fdisplay.grid(row=0, sticky="nsew")
         
@@ -77,17 +77,11 @@ class UI:
 
         
 
-        # this shit refuses to be put in a loop
-        self.buttons.rowconfigure(0, weight=self.settings.button_weight)
-        self.buttons.rowconfigure(1, weight=self.settings.button_weight)
-        self.buttons.rowconfigure(2, weight=self.settings.button_weight)
-        self.buttons.rowconfigure(3, weight=self.settings.button_weight)
-        self.buttons.columnconfigure(0, weight=self.settings.button_weight)
-        self.buttons.columnconfigure(1, weight=self.settings.button_weight)
-        self.buttons.columnconfigure(2, weight=self.settings.button_weight)
-        self.buttons.columnconfigure(3, weight=self.settings.button_weight)
-        
-        
+        # sets row and col config for buttons frame
+        for index in range(self.settings.nr_buttons_side):
+            self.buttons.rowconfigure(index, weight=self.settings.button_weight)
+            self.buttons.columnconfigure(index, weight=self.settings.button_weight)
+       
         # Creates all the buttons for the calculator
         # - could probably do with a refactor
         
@@ -106,5 +100,6 @@ class UI:
                                   width=self.settings.button_width, image=self.pixel,
                                   compound = "c", command=self._equals))
         for index, button in enumerate(self.button_list):
-            button.grid(row=(index//4), column=index%4)
+            button.grid(row=(index//self.settings.nr_buttons_side),
+                       column=index%self.settings.nr_buttons_side)
 
