@@ -1,70 +1,69 @@
 import tkinter as tk
-#from enum import Enum
 
 
 class UI:
     """ Class to hold interface related objects """
 
     def __init__(self, simpcalc):
+        """ initializes GUI """
 
+        # makes settings and calculator available to UI
         self.settings = simpcalc.settings
         self.calc = simpcalc.calc
         
         self.window = tk.Tk()
         self.window.title('Simplecalc')
+
         self.window.geometry(self.settings.main_geometry)
-        self.window.maxsize(275,230)
+        self.window.maxsize(int(self.settings.main_width), int(self.settings.main_height))
+        self.window.minsize(int(self.settings.main_width)//2, int(self.settings.main_height)//2)
+
         self.window.rowconfigure(0, weight=self.settings.display_frame_weight)
         self.window.rowconfigure(1, weight=self.settings.button_frame_weight)
         self.window.columnconfigure(0, weight=1)
+
         self.pixel = tk.PhotoImage(width=1, height=1)
 
-        #self.inputs = Enum('inputs','1 2 3 4 5 6 7 8 9 0 + - * /')
-
-        
-        # initiate result text
-        self.result_text = tk.StringVar()
-        self.result_text.set(self.calc.get_result())
-
+        # creates the lower frame containing keyboard buttons
+        # and the top frame which will display calculations
         self._create_buttons()
         self._create_display_frame()
        
-    def run_ui(self):
+    def start_loop(self):
         """ Starts the main window loop """
 
         self.window.mainloop()
 
-    def _create_calculator(self):
-        """ creates the calculator """
-
     def _create_display_frame(self):
         """ Creates the box or frame where the result
             will be displayed """
-        self.Fresults = tk.Frame(master=self.window,
+        self.Fdisplay = tk.Frame(master=self.window,
                                  relief='groove',bg='red')
         
-        self.Fresults.grid(row=0, sticky="nsew")
+        self.Fdisplay.grid(row=0, sticky="nsew")
         
+        # initiate result text
+        self.result_text = tk.StringVar()
+        self.result_text.set(self.calc.get_result())
         
-        
-
-        self.lb_results = tk.Label(master=self.Fresults,
+        # creates label that will display calculated result
+        self.lb_results = tk.Label(master=self.Fdisplay,
                                    textvariable=self.result_text)
         self.lb_results.config(width=10, height=5)
         self.lb_results.pack(fill="both", side="right")
     def _equals(self):
+        """ Starts a calculation and retrieves and display the result """
 
         self.calc.calculate()
+
+        # updates display with result
         self.result_text.set(self.calc.get_result())
-        print(self.result_text)
+
     def send_input(self, _input):
         """ function sequence when sending input to calculator """
 
-        # skips entering an operator if calculator input already ends with an operator
-        if list(filter(self.calc.get_input().endswith, self.settings.operators)):
-            if _input in self.settings.operators:
-                return
-
+        
+        # sends the input string to calculator object
         self.calc.set_input(_input)
 
         # updates result
@@ -89,7 +88,8 @@ class UI:
         self.buttons.columnconfigure(3, weight=self.settings.button_weight)
         
         
-
+        # Creates all the buttons for the calculator
+        # - could probably do with a refactor
         self._create_row1()
         self._create_row2()
         self._create_row3()
