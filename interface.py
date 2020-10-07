@@ -40,17 +40,17 @@ class UI:
     def _create_display_frame(self):
         """ Creates the box or frame where the result
             will be displayed """
-        self.Fresults = tk.Frame(master=self.window,
+        self.Fdisplay = tk.Frame(master=self.window,
                                  relief='groove',bg='red')
         
-        self.Fresults.grid(row=0, sticky="nsew")
+        self.Fdisplay.grid(row=0, sticky="nsew")
         
         # initiate result text
         self.result_text = tk.StringVar()
         self.result_text.set(self.calc.get_result())
         
         # creates label that will display calculated result
-        self.lb_results = tk.Label(master=self.Fresults,
+        self.lb_results = tk.Label(master=self.Fdisplay,
                                    textvariable=self.result_text)
         self.lb_results.config(width=10, height=5)
         self.lb_results.pack(fill="both", side="right")
