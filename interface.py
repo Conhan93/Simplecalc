@@ -38,7 +38,7 @@ class UI:
         """ Creates the box or frame where the result
             will be displayed """
         self.Fdisplay = tk.Frame(master=self.window,
-                                 relief='groove',bg='red')
+                                 relief='groove')
         
         self.Fdisplay.grid(row=0, sticky="nsew")
         
