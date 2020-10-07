@@ -8,8 +8,8 @@ class Settings:
         self.button_width = 60
 
         # Root window settings
-        self.main_height = '300'
-        self.main_width = '270'
+        self.main_height = '230'
+        self.main_width = '275'
 
         self.main_geometry = str(self.main_width) + "x" + self.main_height
 

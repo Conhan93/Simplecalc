@@ -12,19 +12,19 @@ class UI:
         
         self.window = tk.Tk()
         self.window.title('Simplecalc')
+
         self.window.geometry(self.settings.main_geometry)
-        self.window.maxsize(275,230)
+        self.window.maxsize(int(self.settings.main_width), int(self.settings.main_height))
+
         self.window.rowconfigure(0, weight=self.settings.display_frame_weight)
         self.window.rowconfigure(1, weight=self.settings.button_frame_weight)
         self.window.columnconfigure(0, weight=1)
+
         self.pixel = tk.PhotoImage(width=1, height=1)
 
-        #self.inputs = Enum('inputs','1 2 3 4 5 6 7 8 9 0 + - * /')
 
         
-        # initiate result text
-        self.result_text = tk.StringVar()
-        self.result_text.set(self.calc.get_result())
+        
 
         self._create_buttons()
         self._create_display_frame()
@@ -45,9 +45,11 @@ class UI:
         
         self.Fresults.grid(row=0, sticky="nsew")
         
+        # initiate result text
+        self.result_text = tk.StringVar()
+        self.result_text.set(self.calc.get_result())
         
-        
-
+        # creates label that will display calculated result
         self.lb_results = tk.Label(master=self.Fresults,
                                    textvariable=self.result_text)
         self.lb_results.config(width=10, height=5)
@@ -64,7 +66,7 @@ class UI:
         if list(filter(self.calc.get_input().endswith, self.settings.operators)):
             if _input in self.settings.operators:
                 return
-
+        # sends the input string to calculator object
         self.calc.set_input(_input)
 
         # updates result
