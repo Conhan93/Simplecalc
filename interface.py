@@ -6,7 +6,9 @@ class UI:
     """ Class to hold interface related objects """
 
     def __init__(self, simpcalc):
+        """ initializes GUI """
 
+        # makes settings and calculator available to UI
         self.settings = simpcalc.settings
         self.calc = simpcalc.calc
         
@@ -15,6 +17,7 @@ class UI:
 
         self.window.geometry(self.settings.main_geometry)
         self.window.maxsize(int(self.settings.main_width), int(self.settings.main_height))
+        self.window.minsize(int(self.settings.main_width)//2, int(self.settings.main_height)//2)
 
         self.window.rowconfigure(0, weight=self.settings.display_frame_weight)
         self.window.rowconfigure(1, weight=self.settings.button_frame_weight)
@@ -22,10 +25,8 @@ class UI:
 
         self.pixel = tk.PhotoImage(width=1, height=1)
 
-
-        
-        
-
+        # creates the lower frame containing keyboard buttons
+        # and the top frame which will display calculations
         self._create_buttons()
         self._create_display_frame()
        
@@ -33,9 +34,6 @@ class UI:
         """ Starts the main window loop """
 
         self.window.mainloop()
-
-    def _create_calculator(self):
-        """ creates the calculator """
 
     def _create_display_frame(self):
         """ Creates the box or frame where the result
@@ -55,10 +53,13 @@ class UI:
         self.lb_results.config(width=10, height=5)
         self.lb_results.pack(fill="both", side="right")
     def _equals(self):
+        """ Starts a calculation and retrieves and display the result """
 
         self.calc.calculate()
+
+        # updates display with result
         self.result_text.set(self.calc.get_result())
-        print(self.result_text)
+
     def send_input(self, _input):
         """ function sequence when sending input to calculator """
 
