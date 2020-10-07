@@ -5,7 +5,7 @@ class Calculator:
     def __init__(self, settings):
         """ The class that does all the calculations """
 
-        #self.calculator = calculator
+        
         self.settings = settings
 
         # Result that will be displayed
@@ -13,6 +13,7 @@ class Calculator:
 
         # input 
         self.input = ""
+
         # operators
         self.operators = settings.operators
 
@@ -24,7 +25,7 @@ class Calculator:
                 self.result = eval(str(self.result) + self.input)
             else:
                 self.result += eval(self.input)
-            print(self.result)
+            
             self.input = ""
 
     def get_result(self):

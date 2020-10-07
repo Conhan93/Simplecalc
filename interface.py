@@ -1,5 +1,4 @@
 import tkinter as tk
-#from enum import Enum
 
 
 class UI:
@@ -30,7 +29,7 @@ class UI:
         self._create_buttons()
         self._create_display_frame()
        
-    def run_ui(self):
+    def start_loop(self):
         """ Starts the main window loop """
 
         self.window.mainloop()
@@ -89,7 +88,8 @@ class UI:
         self.buttons.columnconfigure(3, weight=self.settings.button_weight)
         
         
-
+        # Creates all the buttons for the calculator
+        # - could probably do with a refactor
         self._create_row1()
         self._create_row2()
         self._create_row3()

@@ -13,12 +13,12 @@ class SimpleCalculator:
         self.calc = Calculator(self.settings)
         
         
-        self.ui = UI(self)
+        self.GUI = UI(self)
 
     def run_calculator(self):
         """ Starts the program """
 
-        self.ui.run_ui()
+        self.GUI.start_loop()
         
 
 
