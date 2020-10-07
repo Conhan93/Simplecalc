@@ -1,6 +1,6 @@
 from interface import UI
 from utils.settings import Settings
-from module1 import ActualCalculator
+from calculator import Calculator
 
 class SimpleCalculator:
     """ Main class """
@@ -8,15 +8,18 @@ class SimpleCalculator:
     def __init__(self):
         """ Initializes program """
 
-        self.actualcalc = ActualCalculator()
         self.settings = Settings()
+
+        self.calc = Calculator(self.settings)
+        
         
         self.ui = UI(self)
 
     def run_calculator(self):
-        """ main loop of the program """
-        while True:
-            pass
+        """ Starts the program """
+
+        self.ui.run_ui()
+        
 
 
 
