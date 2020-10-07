@@ -90,110 +90,21 @@ class UI:
         
         # Creates all the buttons for the calculator
         # - could probably do with a refactor
-        self._create_row1()
-        self._create_row2()
-        self._create_row3()
-        self._create_row4()
         
-        
-    def _create_row1(self):
-        
+        self.button_list = []
 
-        self.bt_one = tk.Button(master=self.buttons, text="1",
+        self.stuff = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8',
+                     '9', '*', '0', '.', '/']
+        for thing in self.stuff:
+            self.button_list.append(tk.Button(master=self.buttons, text=thing,
                                   height=self.settings.button_height,
                                   width=self.settings.button_width,
                                   image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("1"))
-        self.bt_two = tk.Button(master=self.buttons, text="2",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, 
-                                  image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("2"))
-        self.bt_three = tk.Button(master=self.buttons, text="3",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width,
-                                  image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("3"))
-        self.bt_plus = tk.Button(master=self.buttons, text="+",
+                                  compound = "c", command=lambda thing=thing: self.send_input(thing)))
+        self.button_list.append(tk.Button(master=self.buttons, text="=",
                                   height=self.settings.button_height,
                                   width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("+"))
-
-        self.bt_one.grid(row=0,column=0)
-        self.bt_two.grid(row=0,column=1)
-        self.bt_three.grid(row=0,column=2)
-        self.bt_plus.grid(row=0,column=3)
-
-
-    def _create_row2(self):
-
-        self.bt_four = tk.Button(master=self.buttons, text="4",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("4"))
-        self.bt_five = tk.Button(master=self.buttons, text="5",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("5"))
-        self.bt_six = tk.Button(master=self.buttons, text="6",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("6"))
-        self.bt_subt = tk.Button(master=self.buttons, text="-",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("-"))
-
-        self.bt_four.grid(row=1,column=0)
-        self.bt_five.grid(row=1,column=1)
-        self.bt_six.grid(row=1,column=2)
-        self.bt_subt.grid(row=1,column=3)
-
-    def _create_row3(self):
-
-        self.bt_seven = tk.Button(master=self.buttons, text="7",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("7"))
-        self.bt_eight = tk.Button(master=self.buttons, text="8",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("8"))
-        self.bt_nine = tk.Button(master=self.buttons, text="9",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("9"))
-        self.bt_multi = tk.Button(master=self.buttons, text = "X",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("*"))
-
-        self.bt_seven.grid(row=2,column=0)
-        self.bt_eight.grid(row=2,column=1)
-        self.bt_nine.grid(row=2,column=2)
-        self.bt_multi.grid(row=2,column=3)
-
-    def _create_row4(self):
-
-        self.bt_zero = tk.Button(master=self.buttons, text="0",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("0"))
-        self.bt_period = tk.Button(master=self.buttons, text=".",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("."))
-        self.bt_equals = tk.Button(master=self.buttons, text="=",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=self._equals)
-        self.bt_div = tk.Button(master=self.buttons, text = "/",
-                                  height=self.settings.button_height,
-                                  width=self.settings.button_width, image=self.pixel,
-                                  compound = "c", command=lambda: self.send_input("/"))
-
-        self.bt_zero.grid(row=3,column=0)
-        self.bt_period.grid(row=3,column=1)
-        self.bt_equals.grid(row=3,column=2)
-        self.bt_div.grid(row=3,column=3)
+                                  compound = "c", command=self._equals))
+        for index, button in enumerate(self.button_list):
+            button.grid(row=(index//4), column=index%4)
 
