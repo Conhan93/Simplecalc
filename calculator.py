@@ -18,6 +18,7 @@ class Calculator:
 
     def calculate(self):
         """ Calculates the result from the input string """
+
         if self.input:
             if self.input.startswith("*") or self.input.startswith("/"):
                 self.result = eval(str(self.result) + self.input)
@@ -34,6 +35,12 @@ class Calculator:
         return self.input
     def set_input(self, _input):
         """ concatenates on calculator input string """
+
+        # skips entering an operator if calculator input already ends with an operator
+        if list(filter(self.input.endswith, self.settings.operators)):
+            if _input in self.settings.operators:
+                return
+
         self.input += _input
     def clear_memory(self):
         """ sets result to 0 """

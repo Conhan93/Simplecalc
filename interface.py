@@ -63,10 +63,7 @@ class UI:
     def send_input(self, _input):
         """ function sequence when sending input to calculator """
 
-        # skips entering an operator if calculator input already ends with an operator
-        if list(filter(self.calc.get_input().endswith, self.settings.operators)):
-            if _input in self.settings.operators:
-                return
+        
         # sends the input string to calculator object
         self.calc.set_input(_input)
 
