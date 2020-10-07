@@ -8,6 +8,8 @@ class Settings:
         self.button_height = 30
         self.button_width = 60
         self.button_weight = 1
+        # nr buttons across
+        self.nr_buttons_side = 4
 
         # Root window settings
         self.main_height = '230'
