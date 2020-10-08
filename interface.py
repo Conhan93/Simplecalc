@@ -83,22 +83,21 @@ class UI:
             self.buttons.columnconfigure(index, weight=self.settings.button_weight)
        
         # Creates all the buttons for the calculator
-        # - could probably do with a refactor
-        
         self.button_list = []
 
-        self.stuff = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8',
+        self.arguments = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8',
                      '9', '*', '0', '.', '/']
-        for thing in self.stuff:
-            self.button_list.append(tk.Button(master=self.buttons, text=thing,
+        for argument in self.arguments:
+            self.button_list.append(tk.Button(master=self.buttons, text=argument,
                                   height=self.settings.button_height,
                                   width=self.settings.button_width,
                                   image=self.pixel,
-                                  compound = "c", command=lambda thing=thing: self.send_input(thing)))
+                                  compound = "c", command=lambda argument=argument: self.send_input(argument)))
         self.button_list.append(tk.Button(master=self.buttons, text="=",
                                   height=self.settings.button_height,
                                   width=self.settings.button_width, image=self.pixel,
                                   compound = "c", command=self._equals))
+        # places button in grid
         for index, button in enumerate(self.button_list):
             button.grid(row=(index//self.settings.nr_buttons_side),
                        column=index%self.settings.nr_buttons_side)
