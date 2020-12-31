@@ -6,10 +6,14 @@ TODO
 ------
 
 <p>
-  - add expression currently supported by parser/eval
-  - add powers/exponents
-  - add parentheses
   
+  - add operations currently supported by parser/eval
+    - add powers/exponents
+    - add parentheses
+  
+  - add buttons for operations(powers, parentheses)
+  - floor division?
+  - remainder?
   - add back allowing operations with memory
   - add back memory
 </p>
