@@ -1,3 +1,5 @@
+from _parser import Parser 
+from eval import Evaluator
 
 class Calculator:
     """ The class that does all the calculations """
@@ -7,6 +9,10 @@ class Calculator:
 
         
         self.settings = settings
+
+        # stuff that does the actual work
+        self.parser = Parser(settings)
+        self.evaluator = Evaluator(settings)
 
         # Result that will be displayed
         self.result = 0
@@ -19,13 +25,22 @@ class Calculator:
 
     def calculate(self):
         """ Calculates the result from the input string """
-
+        
         if self.input:
+            tokens = self.parser.parse(self.input)
+            self.result = self.evaluator.evaluate(tokens)
+  
+            """
+            evaluation from the before times, keeping as a reminder to
+            allow operations with memory if input starts with an operator
+
             if self.input.startswith("*") or self.input.startswith("/"):
                 self.result = eval(str(self.result) + self.input)
+
             else:
                 self.result += eval(self.input)
-            
+
+            """
             self.input = ""
 
     def get_result(self):
