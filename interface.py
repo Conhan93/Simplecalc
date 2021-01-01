@@ -85,8 +85,10 @@ class UI:
         # Creates all the buttons for the calculator
         self.button_list = []
 
-        self.arguments = ['1', '2', '3', '+', '4', '5', '6', '-', '7', '8',
-                     '9', '*', '0', '.', '/']
+        self.arguments = ['(',')','^','mc',
+                         '1', '2', '3', '+', '4', '5',
+                         '6', '-', '7', '8',
+                         '9', '*', '0', '.', '/']
         for argument in self.arguments:
             self.button_list.append(tk.Button(master=self.buttons, text=argument,
                                   height=self.settings.button_height,
