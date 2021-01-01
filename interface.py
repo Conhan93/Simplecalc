@@ -85,7 +85,7 @@ class UI:
         # Creates all the buttons for the calculator
         self.button_list = []
 
-        self.arguments = ['(',')','^','mc',
+        self.arguments = ['(', ')', '^', 'mc',
                          '1', '2', '3', '+', '4', '5',
                          '6', '-', '7', '8',
                          '9', '*', '0', '.', '/']

@@ -10,6 +10,9 @@ class Evaluator:
     
     def evaluate(self, arguments):
 
+        if len(arguments) == 1:
+            return float(arguments[0])
+
         return self._calculate_result(arguments)
 
     def _calculate_result(self, arguments):

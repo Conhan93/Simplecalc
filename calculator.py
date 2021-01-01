@@ -23,12 +23,22 @@ class Calculator:
         # operators
         self.operators = settings.operators
 
+        self.memory_operator = ''
+
     def calculate(self):
         """ Calculates the result from the input string """
         
         if self.input:
+            if self.input.startswith(tuple(self.operators)):
+                self.memory_operator = self.input[0]
+                self.input = self.input[1:]
+
             tokens = self.parser.parse(self.input)
-            self.result = self.evaluator.evaluate(tokens)
+            
+            if self.memory_operator:
+                self.memory_operation(self.evaluator.evaluate(tokens))
+            else:
+                self.result = self.evaluator.evaluate(tokens)
   
             """
             evaluation from the before times, keeping as a reminder to
@@ -42,6 +52,18 @@ class Calculator:
 
             """
             self.input = ""
+    def memory_operation(self, result):
+
+        if self.memory_operator == '+':
+            self.result += result
+        elif self.memory_operator == '-':
+            self.result -= result
+        elif self.memory_operator == '*':
+            self.result *= result
+        elif self.memory_operator == '/':
+            self.result /= result
+        elif self.memory_operator == '^':
+            self.result **= result
 
     def get_result(self):
         """ returns calculated result in string """
