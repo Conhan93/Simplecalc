@@ -37,6 +37,7 @@ class Calculator:
             
             if self.memory_operator:
                 self.result = self.memory_operation(self.evaluator.evaluate(tokens))
+                self.memory_operator = ''
             else:
                 self.result = self.evaluator.evaluate(tokens)
   
