@@ -52,6 +52,10 @@ class Calculator:
     def set_input(self, _input):
         """ concatenates on calculator input string """
 
+        if _input == 'mc':
+            self.clear_memory()
+            return
+
         # skips entering an operator if calculator input already ends with an operator
         if list(filter(self.input.endswith, self.settings.operators)):
             if _input in self.settings.operators:
