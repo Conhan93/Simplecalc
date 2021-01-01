@@ -5,25 +5,26 @@ class Evaluator:
     def __init__(self, settings):
 
         self.operators = settings.operators
-
-        #self.calc_stack = []
     
     def evaluate(self, arguments):
-
+        """ handles evaluation sequence """
         if len(arguments) == 1:
             return float(arguments[0])
 
         return self._calculate_result(arguments)
 
     def _calculate_result(self, arguments):
-     
+        """ calculates result from tokens(arguments) """
+
         calc_stack = []
+
         # if token is parentheses(in list)
         for index,token in enumerate(arguments):
             if type(token) == list:
                 arguments.insert(index, self._calculate_result(token))
                 arguments.remove(token)
 
+        # main loop
         for operator in self.operators:
             while operator in arguments:
                 for index, argument in enumerate(arguments):
