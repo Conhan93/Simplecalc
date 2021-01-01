@@ -36,34 +36,18 @@ class Calculator:
             tokens = self.parser.parse(self.input)
             
             if self.memory_operator:
-                self.memory_operation(self.evaluator.evaluate(tokens))
+                self.result = self.memory_operation(self.evaluator.evaluate(tokens))
             else:
                 self.result = self.evaluator.evaluate(tokens)
   
-            """
-            evaluation from the before times, keeping as a reminder to
-            allow operations with memory if input starts with an operator
-
-            if self.input.startswith("*") or self.input.startswith("/"):
-                self.result = eval(str(self.result) + self.input)
-
-            else:
-                self.result += eval(self.input)
-
-            """
+           
             self.input = ""
     def memory_operation(self, result):
-
-        if self.memory_operator == '+':
-            self.result += result
-        elif self.memory_operator == '-':
-            self.result -= result
-        elif self.memory_operator == '*':
-            self.result *= result
-        elif self.memory_operator == '/':
-            self.result /= result
-        elif self.memory_operator == '^':
-            self.result **= result
+        """ handles operation to stored result """
+        tokens = [str(self.result),
+                  self.memory_operator,
+                  str(result)]
+        return self.evaluator.evaluate(tokens)
 
     def get_result(self):
         """ returns calculated result in string """
