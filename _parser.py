@@ -11,28 +11,28 @@ class Parser:
         self.last_sub_len = 0
 
     def parse(self, text):
-        stack = []
+        tokens = []
         last = 0
         
         for index, character in enumerate(text):
 
             if character == '(' and index >= last:
-                self._open_parentheses(stack, text, index, character)
+                self._open_parentheses(tokens, text, index, character)
                 last = self.last_sub_len + index + 1    
 
             elif character == ')' and len(self.p_stack) > 0 and index >= last:
-                return self._close_parentheses(last, stack, text, index)
+                return self._close_parentheses(last, tokens, text, index)
 
             elif character in self.operators and index >= last:
                 if text[index-1] not in self.operators and index != 0:
-                    stack.append(text[last:index])
-                    stack.append(character)
+                    tokens.append(text[last:index])
+                    tokens.append(character)
                     last = index + 1
 
-        stack.append(text[last:])
-        self._clear_empty_tokens(stack)
+        tokens.append(text[last:])
+        self._clear_empty_tokens(tokens)
 
-        return stack
+        return tokens
     def _clear_empty_tokens(self, tokens):
         """ removes empty tokens from list """
         try:

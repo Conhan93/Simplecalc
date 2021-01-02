@@ -6,38 +6,38 @@ class Evaluator:
 
         self.operators = settings.operators
     
-    def evaluate(self, arguments):
+    def evaluate(self, tokens):
         """ handles evaluation sequence """
-        if len(arguments) == 1:
-            return float(arguments[0])
+        if len(tokens) == 1:
+            return float(tokens[0])
 
-        return self._calculate_result(arguments)
+        return self._calculate_result(tokens)
 
-    def _calculate_result(self, arguments):
-        """ calculates result from tokens(arguments) """
+    def _calculate_result(self, tokens):
+        """ calculates result from tokens(tokens) """
 
         calc_stack = []
 
         # if token is parentheses(in list)
-        for index,token in enumerate(arguments):
+        for index,token in enumerate(tokens):
             if type(token) == list:
-                arguments.insert(index, self._calculate_result(token))
-                arguments.remove(token)
+                tokens.insert(index, self._calculate_result(token))
+                tokens.remove(token)
 
         # main loop
         for operator in self.operators:
-            while operator in arguments:
-                for index, argument in enumerate(arguments):
+            while operator in tokens:
+                for index, argument in enumerate(tokens):
                     if argument == operator:
-                        calc_stack.append(arguments[index-1])
-                        calc_stack.append(arguments[index+1])
+                        calc_stack.append(tokens[index-1])
+                        calc_stack.append(tokens[index+1])
                         self._perform_operation(argument, calc_stack)
 
                         # removes two tokens and replaces the third with result
                         for i in range(2):
-                            arguments.pop(index-1)
-                        if(len(arguments) >= 3):
-                            arguments[index-1] = calc_stack.pop()
+                            tokens.pop(index-1)
+                        if(len(tokens) >= 3):
+                            tokens[index-1] = calc_stack.pop()
 
         # return value of expression         
         return float(calc_stack.pop())
