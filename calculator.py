@@ -1,3 +1,5 @@
+from _parser import Parser 
+from eval import Evaluator
 
 class Calculator:
     """ The class that does all the calculations """
@@ -8,6 +10,10 @@ class Calculator:
         
         self.settings = settings
 
+        # stuff that does the actual work
+        self.parser = Parser(settings)
+        self.evaluator = Evaluator(settings)
+
         # Result that will be displayed
         self.result = 0
 
@@ -17,16 +23,32 @@ class Calculator:
         # operators
         self.operators = settings.operators
 
+        self.memory_operator = ''
+
     def calculate(self):
         """ Calculates the result from the input string """
-
+        
         if self.input:
-            if self.input.startswith("*") or self.input.startswith("/"):
-                self.result = eval(str(self.result) + self.input)
-            else:
-                self.result += eval(self.input)
+            if self.input.startswith(tuple(self.operators)):
+                self.memory_operator = self.input[0]
+                self.input = self.input[1:]
+
+            tokens = self.parser.parse(self.input)
             
+            if self.memory_operator:
+                self.result = self.memory_operation(self.evaluator.evaluate(tokens))
+            else:
+                self.result = self.evaluator.evaluate(tokens)
+  
+           
             self.input = ""
+    def memory_operation(self, result):
+        """ handles operation to stored result """
+        tokens = [str(self.result),
+                  self.memory_operator,
+                  str(result)]
+        self.memory_operator = ''
+        return self.evaluator.evaluate(tokens)
 
     def get_result(self):
         """ returns calculated result in string """
@@ -36,6 +58,10 @@ class Calculator:
         return self.input
     def set_input(self, _input):
         """ concatenates on calculator input string """
+
+        if _input == 'mc':
+            self.clear_memory()
+            return
 
         # skips entering an operator if calculator input already ends with an operator
         if list(filter(self.input.endswith, self.settings.operators)):

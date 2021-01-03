@@ -22,5 +22,6 @@ class Settings:
         self.button_frame_weight = 4
 
         # Calculator stuff
-        self.operators = ["+", "-", "*", "/"]
+        #self.operators = ["+", "-", "*", "/"]
+        self.operators = ['^','/','*','+','-']
 
