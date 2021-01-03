@@ -8,6 +8,7 @@ class Evaluator:
     
     def evaluate(self, tokens):
         """ handles evaluation sequence """
+
         if len(tokens) == 1:
             return float(tokens[0])
 

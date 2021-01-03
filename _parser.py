@@ -11,6 +11,7 @@ class Parser:
         self.last_sub_len = 0
 
     def parse(self, text):
+        """ turns input string into a list of tokens """
         tokens = []
         last = 0
         
