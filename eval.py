@@ -9,13 +9,14 @@ class Evaluator:
     def evaluate(self, tokens):
         """ handles evaluation sequence """
 
-        if len(tokens) == 1:
-            return float(tokens[0])
 
         return self._calculate_result(tokens)
 
     def _calculate_result(self, tokens):
         """ calculates result from tokens(tokens) """
+
+        if len(tokens) == 1:
+            return float(tokens[0])
 
         calc_stack = []
 
