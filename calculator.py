@@ -51,8 +51,8 @@ class Calculator:
         return self.evaluator.evaluate(tokens)
 
     def get_result(self):
-        """ returns calculated result in string """
-        return str(self.result)
+        """ returns calculated result in string """        
+        return str(round(self.result, 6))
     def get_input(self):
         """ returns input string """
         return self.input
